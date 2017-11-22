@@ -4,13 +4,17 @@ import sys
 from PIL import Image
 import os
 
+if len(sys.argv) == 2:
+    set = sys.argv[1]
+else:
+    set = 'train'
+
 def down(url,path):
         f = open(path, 'wb')
         f.write(urllib.request.urlopen(url,timeout=5).read())
         f.close()
 
 
-set = 'train'
 data = pd.read_csv('../data/{}/lim_images.csv'.format(set))
 #downloaded = pd.DataFrame(columns=['ImageID','OriginalURL'])
 #not_downloaded = pd.DataFrame(columns=['ImageID','OriginalURL'])

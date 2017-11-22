@@ -1,9 +1,14 @@
 import pandas as pd
+import sys
+
+if len(sys.argv) == 2:
+    set = sys.argv[1]
+else:
+    set = 'train'
 
 products = pd.read_csv('data/products.csv')
 labelids = products.labelid.values.tolist()
 
-set = 'train'
 
 
 print('Label IDS fetched')
