@@ -1,6 +1,6 @@
 import pandas as pd
 
-products = pd.read_csv('../data/products.csv')
+products = pd.read_csv('data/products.csv')
 labelids = products.labelid.values.tolist()
 
 set = 'train'
