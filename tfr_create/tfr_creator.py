@@ -25,7 +25,8 @@ def create_tf_example(image_det, image_path, pdt):
         width, height = img.size
         image_format = img.format
 
-    filename = os.path.basename(image_path) # Filename of the image. Empty if image is not from file
+    filename = image_path.decode()
+    # filename = os.path.basename(image_path) # Filename of the image. Empty if image is not from file
     # image_format = image_path.split('.')[-1] # b'jpeg' or b'png'
 
 
