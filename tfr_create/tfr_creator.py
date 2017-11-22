@@ -4,22 +4,29 @@ import pandas as pd
 from PIL import Image
 
 import dataset_util
+import sys
 
+if len(sys.argv) == 2:
+    set = sys.argv[1]
+else:
+    set = 'train'
 
-flags = tf.app.flags
-flags.DEFINE_string('output_path', '/home/syed/MLND/capstone_OD/trainprep/data/train.record', 'Path to output TFRecord')
-FLAGS = flags.FLAGS
-
+output_record_path = '../data/{}.record'.format(set)
+images_path = '../../data/{}/resized_images'.format(set)
+pdts_path = '../data/products.csv'
+pdt_bbox_path = '../../data/{}/product_bbox.csv'.format(set)
 
 def create_tf_example(image_det, image_path, pdt):
-  # TODO(user): Populate the following variables from your example.
+
     with tf.gfile.Open(image_path) as image_file:
         encoded_image_data = image_file.read()
+
     with Image.open(image_path) as img:
         width, height = img.size
+        image_format = img.format
 
     filename = os.path.basename(image_path) # Filename of the image. Empty if image is not from file
-    image_format = image_path.split('.')[-1] # b'jpeg' or b'png'
+    # image_format = image_path.split('.')[-1] # b'jpeg' or b'png'
 
 
     xmins = [] # List of normalized left x coordinates in bounding box (1 per box)
@@ -41,8 +48,13 @@ def create_tf_example(image_det, image_path, pdt):
         xmaxs.append(xmax)
         ymins.append(ymin)
         ymaxs.append(ymax)
+
         classes_text.append(class_text)
         classes.append(class_)
+
+    print ("\nimage : {}".format(image_path))
+    print ("classes : {}".format(classes_text))
+    print ('classes_num : {}\n'.format(classes))
 
     tf_example = tf.train.Example(features=tf.train.Features(feature={
       'image/height': dataset_util.int64_feature(height),
@@ -62,18 +74,18 @@ def create_tf_example(image_det, image_path, pdt):
 
 
 def main(_):
-    writer = tf.python_io.TFRecordWriter(FLAGS.output_path)
+    writer = tf.python_io.TFRecordWriter(output_record_path)
 
-  # TODO(user): Write code to read in your dataset to examples variable
-    path = '/home/syed/MLND/capstone_OD/data/images'
-    pdt_bbox = pd.read_csv('/home/syed/MLND/capstone_OD/data/product_bbox.csv')
-    pdt = pd.read_csv('/home/syed/MLND/capstone_OD/data/products.csv')
-    for image in os.listdir(path):
+    pdt_bbox = pd.read_csv(pdt_bbox_path)
+    pdt = pd.read_csv(pdts_path)
+    images = os.listdir(images_path)
+    for image in images:
         imageid = image.split('.')[0]
         image_det = pdt_bbox[pdt_bbox['ImageID'] == imageid]
+        image_path = os.path.join(images_path,image)
 
+        tf_example = create_tf_example(image_det,image_path,pdt)
 
-        tf_example = create_tf_example(image_det,os.path.join(path,image),pdt)
         writer.write(tf_example.SerializeToString())
 
     writer.close()
