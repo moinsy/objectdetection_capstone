@@ -25,6 +25,7 @@ for image in images:
         im.save(resized_imagepath)
         print ('Resized image to : {}'.format(resized_imagepath))
         print('Total images resized: {}'.format(len(os.listdir(resized_imagespath))))
-    except:
+    except Exception as e:
+        print (e)
         print ('Image not Verified, hence not resized : {}'.format(imagepath))
         pass
