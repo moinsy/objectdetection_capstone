@@ -7,8 +7,8 @@ if len(sys.argv) == 2:
 else:
     set = 'train'
 
-imagespath = '../data/{}/images'
-resized_imagespath = '../data/{}/resized_images'
+imagespath = '../data/{}/images'.format(set)
+resized_imagespath = '../data/{}/resized_images'.format(set)
 
 if not os.path.exists(resized_imagespath):
     os.makedirs(resized_imagespath)
@@ -20,9 +20,11 @@ for image in images:
         resized_imagepath = os.path.join(resized_imagespath,image)
         im = Image.open(imagepath)
         im.verify()
-
+        print ('Verifying image: {}'.format(imagepath))
         im.thumbnail(1000,1000)
         im.save(resized_imagepath)
-
+        print ('Resized image to : {}'.format(resized_imagepath))
+        print('Total images resized: {}'.format(len(os.listdir(resized_imagespath))))
     except:
+        print ('Image not Verified, hence not resized : {}'.format(imagepath))
         pass
