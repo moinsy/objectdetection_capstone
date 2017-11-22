@@ -44,7 +44,7 @@ def create_tf_example(image_det, image_path, pdt):
         xmax = row[1]['XMax']
         ymin = row[1]['YMin']
         ymax = row[1]['YMax']
-        class_text = row[1]['LabelName']
+        class_text = row[1]['LabelName'].encode("utf-8")
         class_ = pdt[pdt['labelid']==class_text].id.values[0]
         xmins.append(xmin)
         xmaxs.append(xmax)
