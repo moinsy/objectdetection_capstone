@@ -23,7 +23,8 @@ def create_tf_example(image_det, image_path, pdt):
 
     with Image.open(image_path) as img:
         width, height = img.size
-        image_format = img.format
+
+    image_format = b'jpeg'
 
     # filename = image_path.decode()
     filename = os.path.basename(image_path).encode("utf-8") # Filename of the image. Empty if image is not from file
