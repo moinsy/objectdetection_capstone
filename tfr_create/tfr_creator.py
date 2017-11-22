@@ -25,15 +25,15 @@ def create_tf_example(image_det, image_path, pdt):
         width, height = img.size
         image_format = img.format
 
-    filename = image_path.decode()
-    # filename = os.path.basename(image_path) # Filename of the image. Empty if image is not from file
+    # filename = image_path.decode()
+    filename = os.path.basename(image_path) # Filename of the image. Empty if image is not from file
     # image_format = image_path.split('.')[-1] # b'jpeg' or b'png'
 
 
     xmins = [] # List of normalized left x coordinates in bounding box (1 per box)
     xmaxs = [] # List of normalized right x coordinates in bounding box  (1 per box)
     ymins = [] # List of normalized top y coordinates in bounding box (1 per box)
-    ymaxs = [] # List of normalized bottom y coordinates in bounding box
+    ymaxs = [] # List of normalized bottom y coordinates in bounding boxz
              # (1 per box)
     classes_text = [] # List of string class name of bounding box (1 per box)
     classes = [] # List of integer class id of bounding box (1 per box)
