@@ -21,7 +21,10 @@ for image in images:
         im = Image.open(imagepath)
         im.verify()
         print ('Verifying image: {}'.format(imagepath))
-        im.thumbnail(1000,1000)
+
+        im = Image.open(imagepath)
+        im.thumbnail((1000,1000))
+
         im.save(resized_imagepath)
         print ('Resized image to : {}'.format(resized_imagepath))
         print('Total images resized: {}'.format(len(os.listdir(resized_imagespath))))
