@@ -18,7 +18,7 @@ pdt_bbox_path = '../../data/{}/product_bbox.csv'.format(set)
 
 def create_tf_example(image_det, image_path, pdt):
 
-    with tf.gfile.Open(image_path) as image_file:
+    with tf.gfile.Open(image_path,'rb') as image_file:
         encoded_image_data = image_file.read()
 
     with Image.open(image_path) as img:
