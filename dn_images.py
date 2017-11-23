@@ -19,6 +19,10 @@ data = pd.read_csv('../data/{}/lim_images.csv'.format(set))
 #downloaded = pd.DataFrame(columns=['ImageID','OriginalURL'])
 #not_downloaded = pd.DataFrame(columns=['ImageID','OriginalURL'])
 
+if not os.path.exists('../data/{}/images'.format(set)):
+    os.makedirs('../data/{}/images'.format(set))
+
+
 for row in data.iterrows():
 
     imageid = row[1]['ImageID']
