@@ -9,5 +9,5 @@ with open(label_map_path, 'w+') as f:
         id = row[1]['id']
         name = row[1]['labelid']
         display_name = row[1]['labelname']
-        line = 'item {\n\tid: '+ str(id) +'\n\tname: '+ name +'\n\tdisplay_name: '+ display_name +'\n}\n'
+        line = 'item {\n\tid: '+ str(id) +'\n\tname: \"'+ name +'\"\n\tdisplay_name: \"'+ display_name +'\"\n}\n'
         f.write(line)
