@@ -30,7 +30,7 @@ label_map = label_map_util.load_labelmap(PATH_TO_LABELS)
 categories = label_map_util.convert_label_map_to_categories(label_map, max_num_classes=NUM_CLASSES, use_display_name=True)
 category_index = label_map_util.create_category_index(categories)
 
-PATH_TO_TEST_IMAGES_DIR = '../../data/train/resized_images'
+PATH_TO_TEST_IMAGES_DIR = '../data/train/resized_images'
 image_name = '00106a172812b3b0.jpg'
 image_path =  os.path.join(PATH_TO_TEST_IMAGES_DIR, image_name)
 
