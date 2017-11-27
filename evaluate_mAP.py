@@ -56,7 +56,7 @@ res = {}
 tp,fp,fn,precision,recall,p_recall,ap = 0,0,0,0,0,0,0
 
 u_imgs = test_df.ImageID.unique().tolist()
-
+mAP = 0
 for i,img in enumerate(u_imgs):
 
         annon = test_df[test_df.ImageID.isin([img])]
