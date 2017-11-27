@@ -78,5 +78,5 @@ def objdet():
             img.show()
 
 
-if '__name__' == '__main__':
+if __name__ == '__main__':
     objdet()
