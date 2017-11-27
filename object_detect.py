@@ -119,12 +119,12 @@ def main(_):
     if FLAGS.IMAGE_NAME:
         s_path,res = objdetfromname(FLAGS.IMAGE_NAME)
         Image.open(s_path).show()
-        print res
+        print (res)
 
     elif FLAGS.IMAGE_URL:
         s_path,res = objdetfromurl(FLAGS.IMAGE_URL)
         Image.open(s_path).show()
-        print res
+        print (res)
     else:
         print ('Please enter Image name or url')
 
