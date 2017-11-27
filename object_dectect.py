@@ -84,6 +84,9 @@ def objdet(image_path):
 
             format = image_path.split('.')[-1]
             save_path = 'data/image/after_detect.'+format
+            img = Image.fromarray(image_np,'RGB')
+            img.save(save_path)
+
             return save_path
 
 
