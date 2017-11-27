@@ -5,6 +5,7 @@ from PIL import Image
 import urllib.request
 import label_map_util
 import visualization_utils as vis_util
+import pandas as pd
 
 flags = tf.app.flags
 flags.DEFINE_string('PATH_TO_GRAPH', '../output_dir2/frozen_inference_graph.pb',
@@ -38,6 +39,10 @@ def objdetfromurl(image_url):
     down(image_url,dn_path)
 
     return objdet(dn_path)
+
+def get_label(id):
+    pdts = pd.read_csv('data/products.csv')
+    return pdts[pdts['id'] == id].labelname.values[0]
 
 
 def objdet(image_path):
@@ -83,6 +88,7 @@ def objdet(image_path):
                 [detection_boxes, detection_scores, detection_classes, num_detections],
                 feed_dict={image_tensor: image_np_expanded})
 
+
             # Visualization of the results of a detection.
             vis_util.visualize_boxes_and_labels_on_image_array(
                 image_np,
@@ -98,19 +104,27 @@ def objdet(image_path):
             img = Image.fromarray(image_np,'RGB')
             img.save(save_path)
 
-            return save_path
+            scores = [x for x in scores[0] if x > 0.5]
+
+            boxes, classes, num = boxes[0][:len(scores)], classes[0][:len(scores)], len(scores)
+
+            res = {}
+            for i,clas in enumerate(classes):
+                res[get_label(clas)] = {'bbox': boxes[i], 'score':scores[i]}
+
+            return save_path,res
 
 
 def main(_):
     if FLAGS.IMAGE_NAME:
-        s_path = objdetfromname(FLAGS.IMAGE_NAME)
+        s_path,res = objdetfromname(FLAGS.IMAGE_NAME)
         Image.open(s_path).show()
-
+        print res
 
     elif FLAGS.IMAGE_URL:
-        s_path = objdetfromurl(FLAGS.IMAGE_URL)
+        s_path,res = objdetfromurl(FLAGS.IMAGE_URL)
         Image.open(s_path).show()
-
+        print res
     else:
         print ('Please enter Image name or url')
 
