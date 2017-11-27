@@ -4,6 +4,23 @@ This project aims at identifying a product object in a given image.
 
 The project proposal and report are placed in the 'doc' directory
 
+Libraries used:
+
+ - pandas
+ - tensorflow
+ - pillow
+ - matplotlib
+ - numpy
+ 
+ 
+Files to be downloaded:
+
+- **frozen_model**,
+    to be saved in 'data/frozen_model/frozen_fraph.pb' format
+    l
+    
+    **download link**: https://expirebox.com/files/b98d45cba0943032186b310e7cac79b0.zip
+
 Below is a brief description of the files in this project,
 
 - **prepData.py**, this file filters out what and how the data needs to be downloaded, for all the three sets(Train,Validation,Test).
