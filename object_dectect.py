@@ -1,24 +1,46 @@
 import tensorflow as tf
 import numpy as np
 import os
-import sys
-from collections import defaultdict
-from io import StringIO
-from matplotlib import pyplot as plt
 from PIL import Image
-
+import urllib.request
 import label_map_util
-import visualization_utils as vis_util
+
+flags = tf.app.flags
+flags.DEFINE_string('PATH_TO_GRAPH', '../output_dir2/frozen_inference_graph.pb',
+                    'Path to a frozen graph.')
+flags.DEFINE_string('PATH_TO_LABELS', 'data/label_map.pbtxt',
+                    'Path to label map file')
+flags.DEFINE_string('PATH_TO_TEST_IMAGES_DIR', '../data/test/resized_images',
+                    'Path to test set images')
+flags.DEFINE_string('IMAGE_NAME', '',
+                    'name of the image file in the test set')
+flags.DEFINE_string('IMAGE_URL', '', 'url of the image to detect objects')
 
 def load_image_into_numpy_array(image):
     (im_width, im_height) = image.size
     return np.array(image.getdata()).reshape((im_height, im_width, 3)).astype(np.uint8)
 
+def down(url, path):
+    f = open(path, 'wb')
+    f.write(urllib.request.urlopen(url, timeout=5).read())
+    f.close()
 
-def objdet():
+def objdetfromname(image_name):
+    image_path =  os.path.join(flags.PATH_TO_TEST_IMAGES_DIR, image_name)
+    return objdet(image_path)
 
-    PATH_TO_GRAPH = '../output_dir2/frozen_inference_graph.pb'
-    PATH_TO_LABELS = os.path.join('data', 'label_map.pbtxt')
+def objdetfromurl(image_url):
+    format = image_url.split('.')[-1]
+    dn_path = 'data/image/to_detect.'+format
+    down(image_url,dn_path)
+
+    return objdet(dn_path)
+
+
+def objdet(image_path):
+
+    PATH_TO_GRAPH = flags.PATH_TO_GRAPH
+    PATH_TO_LABELS = flags.PATH_TO_LABELS
     NUM_CLASSES = 17
 
     detection_graph = tf.Graph()
@@ -33,12 +55,7 @@ def objdet():
     categories = label_map_util.convert_label_map_to_categories(label_map, max_num_classes=NUM_CLASSES, use_display_name=True)
     category_index = label_map_util.create_category_index(categories)
 
-    PATH_TO_TEST_IMAGES_DIR = '../data/test/resized_images'
-    image_name = 'a644c4c46d7c0b0f.jpg'
-    image_path =  os.path.join(PATH_TO_TEST_IMAGES_DIR, image_name)
 
-    # Size, in inches, of the output images.
-    IMAGE_SIZE = (12, 8)
 
     with detection_graph.as_default():
         with tf.Session(graph=detection_graph) as sess:
@@ -62,21 +79,25 @@ def objdet():
             (boxes, scores, classes, num) = sess.run(
                 [detection_boxes, detection_scores, detection_classes, num_detections],
                 feed_dict={image_tensor: image_np_expanded})
-            # Visualization of the results of a detection.
-            vis_util.visualize_boxes_and_labels_on_image_array(
-                image_np,
-                np.squeeze(boxes),
-                np.squeeze(classes).astype(np.int32),
-                np.squeeze(scores),
-                category_index,
-                use_normalized_coordinates=True,
-                line_thickness=8)
-            # plt.figure(figsize=IMAGE_SIZE)
-            # plt.imshow(image_np)
-            img = Image.fromarray(image_np, 'RGB')
-            img.save('data/od.jpg')
-            img.show()
+
+            format = image_path.split('.')[-1]
+            save_path = 'data/image/after_detect.'+format
+            return save_path
+
+
+def main(_):
+    if flags.IMAGE_NAME:
+        s_path = objdetfromname(flags.IMAGE_NAME)
+        Image.open(s_path).show()
+
+
+    elif flags.IMAGE_URL:
+        s_path = objdetfromurl(flags.IMAGE_URL)
+        Image.open(s_path).show()
+
+    else:
+        print ('Please enter Image name or url')
 
 
 if __name__ == '__main__':
-    objdet()
+    tf.app.run()
