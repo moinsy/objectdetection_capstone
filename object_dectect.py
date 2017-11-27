@@ -5,16 +5,16 @@ from PIL import Image
 import urllib.request
 import label_map_util
 
-flags = tf.app.flags
-flags.DEFINE_string('PATH_TO_GRAPH', '../output_dir2/frozen_inference_graph.pb',
+FLAGS = tf.app.flags
+FLAGS.DEFINE_string('PATH_TO_GRAPH', '../output_dir2/frozen_inference_graph.pb',
                     'Path to a frozen graph.')
-flags.DEFINE_string('PATH_TO_LABELS', 'data/label_map.pbtxt',
+FLAGS.DEFINE_string('PATH_TO_LABELS', 'data/label_map.pbtxt',
                     'Path to label map file')
-flags.DEFINE_string('PATH_TO_TEST_IMAGES_DIR', '../data/test/resized_images',
+FLAGS.DEFINE_string('PATH_TO_TEST_IMAGES_DIR', '../data/test/resized_images',
                     'Path to test set images')
-flags.DEFINE_string('IMAGE_NAME', '',
+FLAGS.DEFINE_string('IMAGE_NAME', '',
                     'name of the image file in the test set')
-flags.DEFINE_string('IMAGE_URL', '', 'url of the image to detect objects')
+FLAGS.DEFINE_string('IMAGE_URL', '', 'url of the image to detect objects')
 
 def load_image_into_numpy_array(image):
     (im_width, im_height) = image.size
@@ -26,7 +26,7 @@ def down(url, path):
     f.close()
 
 def objdetfromname(image_name):
-    image_path =  os.path.join(flags.PATH_TO_TEST_IMAGES_DIR, image_name)
+    image_path =  os.path.join(FLAGS.PATH_TO_TEST_IMAGES_DIR, image_name)
     return objdet(image_path)
 
 def objdetfromurl(image_url):
@@ -39,8 +39,8 @@ def objdetfromurl(image_url):
 
 def objdet(image_path):
 
-    PATH_TO_GRAPH = flags.PATH_TO_GRAPH
-    PATH_TO_LABELS = flags.PATH_TO_LABELS
+    PATH_TO_GRAPH = FLAGS.PATH_TO_GRAPH
+    PATH_TO_LABELS = FLAGS.PATH_TO_LABELS
     NUM_CLASSES = 17
 
     detection_graph = tf.Graph()
@@ -86,13 +86,13 @@ def objdet(image_path):
 
 
 def main(_):
-    if flags.IMAGE_NAME:
-        s_path = objdetfromname(flags.IMAGE_NAME)
+    if FLAGS.IMAGE_NAME:
+        s_path = objdetfromname(FLAGS.IMAGE_NAME)
         Image.open(s_path).show()
 
 
-    elif flags.IMAGE_URL:
-        s_path = objdetfromurl(flags.IMAGE_URL)
+    elif FLAGS.IMAGE_URL:
+        s_path = objdetfromurl(FLAGS.IMAGE_URL)
         Image.open(s_path).show()
 
     else:
