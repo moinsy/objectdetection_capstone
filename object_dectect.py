@@ -4,6 +4,7 @@ import os
 from PIL import Image
 import urllib.request
 import label_map_util
+import visualization_utils as vis_util
 
 flags = tf.app.flags
 flags.DEFINE_string('PATH_TO_GRAPH', '../output_dir2/frozen_inference_graph.pb',
@@ -81,6 +82,16 @@ def objdet(image_path):
             (boxes, scores, classes, num) = sess.run(
                 [detection_boxes, detection_scores, detection_classes, num_detections],
                 feed_dict={image_tensor: image_np_expanded})
+
+            # Visualization of the results of a detection.
+            vis_util.visualize_boxes_and_labels_on_image_array(
+                image_np,
+                np.squeeze(boxes),
+                np.squeeze(classes).astype(np.int32),
+                np.squeeze(scores),
+                category_index,
+                use_normalized_coordinates=True,
+                line_thickness=8)
 
             format = image_path.split('.')[-1]
             save_path = 'data/image/after_detect.'+format
