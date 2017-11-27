@@ -28,7 +28,7 @@ def down(url, path):
     f.close()
 
 def objdetfromname(image_name):
-    image_path =  os.path.join(flags.PATH_TO_TEST_IMAGES_DIR, image_name)
+    image_path =  os.path.join(FLAGS.PATH_TO_TEST_IMAGES_DIR, image_name)
     return objdet(image_path)
 
 def objdetfromurl(image_url):
@@ -41,8 +41,8 @@ def objdetfromurl(image_url):
 
 def objdet(image_path):
 
-    PATH_TO_GRAPH = flags.PATH_TO_GRAPH
-    PATH_TO_LABELS = flags.PATH_TO_LABELS
+    PATH_TO_GRAPH = FLAGS.PATH_TO_GRAPH
+    PATH_TO_LABELS = FLAGS.PATH_TO_LABELS
     NUM_CLASSES = 17
 
     detection_graph = tf.Graph()
@@ -88,13 +88,13 @@ def objdet(image_path):
 
 
 def main(_):
-    if flags.IMAGE_NAME:
-        s_path = objdetfromname(flags.IMAGE_NAME)
+    if FLAGS.IMAGE_NAME:
+        s_path = objdetfromname(FLAGS.IMAGE_NAME)
         Image.open(s_path).show()
 
 
-    elif flags.IMAGE_URL:
-        s_path = objdetfromurl(flags.IMAGE_URL)
+    elif FLAGS.IMAGE_URL:
+        s_path = objdetfromurl(FLAGS.IMAGE_URL)
         Image.open(s_path).show()
 
     else:
