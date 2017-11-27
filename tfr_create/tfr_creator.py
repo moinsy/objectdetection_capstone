@@ -12,9 +12,9 @@ else:
     set = 'train'
 
 output_record_path = '../data/{}.record'.format(set)
-images_path = '../../data/{}/resized_images'.format(set)
+images_path = '../data/{}/resized_images'.format(set)
 pdts_path = '../data/products.csv'
-pdt_bbox_path = '../../data/{}/product_bbox.csv'.format(set)
+pdt_bbox_path = '../data/{}/product_bbox.csv'.format(set)
 
 def create_tf_example(image_det, image_path, pdt):
 

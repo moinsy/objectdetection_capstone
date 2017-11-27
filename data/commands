@@ -1,3 +1,13 @@
-python object_detection/train.py --logtostderr --train_dir=/home/paperspace/capstone_OD/train_dir2  --pipeline_config_path=/home/paperspace/capstone_OD/objectdetection_oid/data/pipeline.config
+python object_detection/train.py --logtostderr \
+    --train_dir=/home/paperspace/capstone_OD/train_dir2 \
+    --pipeline_config_path=/home/paperspace/capstone_OD/objectdetection_oid/data/pipeline.config
 
-python object_detection/eval.py --logtostderr --eval_dir=/home/paperspace/capstone_OD/eval_dir2 --pipeline_config_path=/home/paperspace/capstone_OD/objectdetection_oid/data/pipeline.config --checkpoint_dir=/home/paperspace/capstone_OD/train_dir2
+python object_detection/eval.py --logtostderr \
+    --eval_dir=/home/paperspace/capstone_OD/eval_dir2 \
+    --pipeline_config_path=/home/paperspace/capstone_OD/objectdetection_oid/data/pipeline.config \
+    --checkpoint_dir=/home/paperspace/capstone_OD/train_dir2
+
+python object_detection/export_inference_graph.py --input_type image_tensor \
+    --pipeline_config_path /home/paperspace/capstone_OD/objectdetection_oid/data/pipeline.config \
+    --trained_checkpoint_prefix /home/paperspace/capstone_OD/train_dir/model.ckpt-49830 \
+    --output_directory /home/paperspace/capstone_OD/output_dir
