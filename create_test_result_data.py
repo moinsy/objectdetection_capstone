@@ -5,9 +5,9 @@ import json
 import label_map_util
 import os
 
-PATH_TO_GRAPH = '../output_dir2/frozen_inference_graph.pb'
-PATH_TO_LABELS = os.path.join('data', 'label_map.pbtxt')
-PATH_TO_TEST_IMAGES_DIR = '../data/test/resized_images'
+PATH_TO_GRAPH = 'data/frozen_model/frozen_inference_graph.pb'
+PATH_TO_LABELS = 'data/label_map.pbtxt'
+PATH_TO_TEST_IMAGES_DIR = 'data/test/resized_images'
 
 NUM_CLASSES = 17
 

@@ -8,11 +8,11 @@ import visualization_utils as vis_util
 import pandas as pd
 
 flags = tf.app.flags
-flags.DEFINE_string('PATH_TO_GRAPH', '../output_dir2/frozen_inference_graph.pb',
+flags.DEFINE_string('PATH_TO_GRAPH', 'data/frozen_model/frozen_inference_graph.pb',
                     'Path to a frozen graph.')
 flags.DEFINE_string('PATH_TO_LABELS', 'data/label_map.pbtxt',
                     'Path to label map file')
-flags.DEFINE_string('PATH_TO_TEST_IMAGES_DIR', '../data/test/resized_images',
+flags.DEFINE_string('PATH_TO_TEST_IMAGES_DIR', 'data/test/resized_images',
                     'Path to test set images')
 flags.DEFINE_string('IMAGE_NAME', '',
                     'name of the image file in the test set')

@@ -7,8 +7,8 @@ if len(sys.argv) == 2:
 else:
     set = 'train'
 
-imagespath = '../data/{}/images'.format(set)
-resized_imagespath = '../data/{}/resized_images'.format(set)
+imagespath = 'data/{}/images'.format(set)
+resized_imagespath = 'data/{}/resized_images'.format(set)
 
 if not os.path.exists(resized_imagespath):
     os.makedirs(resized_imagespath)

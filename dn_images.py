@@ -15,12 +15,12 @@ def down(url,path):
         f.close()
 
 
-data = pd.read_csv('../data/{}/lim_images.csv'.format(set))
+data = pd.read_csv('data/{}/lim_images.csv'.format(set))
 #downloaded = pd.DataFrame(columns=['ImageID','OriginalURL'])
 #not_downloaded = pd.DataFrame(columns=['ImageID','OriginalURL'])
 
-if not os.path.exists('../data/{}/images'.format(set)):
-    os.makedirs('../data/{}/images'.format(set))
+if not os.path.exists('data/{}/images'.format(set)):
+    os.makedirs('data/{}/images'.format(set))
 
 
 for row in data.iterrows():
@@ -29,7 +29,7 @@ for row in data.iterrows():
     imageurl = row[1]['OriginalURL']
     size = float(row[1]['OriginalSize'])/1000000
     imageformat = imageurl.split('.')[-1]
-    path = '../data/{}/images/{}.{}'.format(set,imageid,imageformat)
+    path = 'data/{}/images/{}.{}'.format(set,imageid,imageformat)
 
     try:
         if not os.path.exists(path):
@@ -41,7 +41,7 @@ for row in data.iterrows():
 #            downloaded.loc[len(downloaded)] = [imageid,imageurl]
 #            downloaded.to_csv('downloaded.csv')
             print ("Downloaded and validated: {}".format(path))
-            print ("Total images:{}".format(len(os.listdir('../data/{}/images'.format(set)))))
+            print ("Total images:{}".format(len(os.listdir('data/{}/images'.format(set)))))
 
     except Exception as e:
         print (e)

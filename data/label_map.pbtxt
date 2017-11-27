@@ -1,0 +1,85 @@
+item {
+	id: 1
+	name: /m/0174k2
+	display_name: Washing machine
+}
+item {
+	id: 2
+	name: /m/01b7fy
+	display_name: Headphones
+}
+item {
+	id: 3
+	name: /m/01c648
+	display_name: Laptop
+}
+item {
+	id: 4
+	name: /m/01m2v
+	display_name: Computer keyboard
+}
+item {
+	id: 5
+	name: /m/024d2
+	display_name: Calculator
+}
+item {
+	id: 6
+	name: /m/02522
+	display_name: Computer monitor
+}
+item {
+	id: 7
+	name: /m/029bxz
+	display_name: Oven
+}
+item {
+	id: 8
+	name: /m/02pjr4
+	display_name: Blender
+}
+item {
+	id: 9
+	name: /m/040b_t
+	display_name: Refrigerator
+}
+item {
+	id: 10
+	name: /m/050k8
+	display_name: Mobile phone
+}
+item {
+	id: 11
+	name: /m/063rgb
+	display_name: Mixer
+}
+item {
+	id: 12
+	name: /m/07c52
+	display_name: Television
+}
+item {
+	id: 13
+	name: /m/07xyvk
+	display_name: Coffeemaker
+}
+item {
+	id: 14
+	name: /m/0dv5r
+	display_name: Camera
+}
+item {
+	id: 15
+	name: /m/0fx9l
+	display_name: Microwave oven
+}
+item {
+	id: 16
+	name: /m/0h8mzrc
+	display_name: Wall clock
+}
+item {
+	id: 17
+	name: /m/0llzx
+	display_name: Sewing machine
+}
