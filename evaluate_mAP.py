@@ -29,7 +29,7 @@ def bb_intersection_over_union(boxA, boxB):
 with open('data/test_images_result.json') as f:
     test_j = json.load(f)
 
-test_df = pd.read_csv('../data/train/product_bbox.csv')
+test_df = pd.read_csv('../data/test/product_bbox.csv')
 
 pdts = pd.read_csv('data/products.csv')
 
