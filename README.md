@@ -17,7 +17,6 @@ Files to be downloaded:
 
 - **frozen_model**,
     to be saved in 'data/frozen_model/frozen_fraph.pb' format
-    l
     
     **download link**: https://expirebox.com/files/b98d45cba0943032186b310e7cac79b0.zip
 
@@ -36,10 +35,10 @@ The set to prepare can be passed as an argument.
 
 - **create_test_result_data.py**, creates a json file at 'data/test_images_result.json', which consists of predicted values of all the test images.
 
-- **evaluate_mAP.py**, uses the json file to compare with actual ground truth values, calculates the Mean Average Precision (mAP)
+- **evaluate_mAP.py**, uses the 'data/test_images_result.json' file to compare with actual ground truth values, calculates the Mean Average Precision (mAP)
 
 - **object_detection.py**, runs the object detection using the frozen model, it takes IMAGE_URL or IMAGE_NAME, to pass IMAGE_NAME, test images needs to be downloaded, as the path directs to 'data/test/resized_images'.
 
-- **object_detection_demo.ipynp**, notebook, which contains object detection demo with output. 
+- **object_detection_demo.ipynb**, notebook, which contains object detection demo with output.
 
 The training and evaluation was run through tensorflow object detection api, from its source folder, using commands present in 'data/commands' file.
