@@ -12,14 +12,6 @@ Libraries used:
  - matplotlib
  - numpy
  
- 
-Files to be downloaded:
-
-- **frozen_model**,
-    to be saved in 'data/frozen_model/frozen_fraph.pb' format
-    
-    **download link**: https://expirebox.com/files/b98d45cba0943032186b310e7cac79b0.zip
-
 Below is a brief description of the files in this project,
 
 - **prepData.py**, this file filters out what and how the data needs to be downloaded, for all the three sets(Train,Validation,Test).
