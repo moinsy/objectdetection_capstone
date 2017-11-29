@@ -61,7 +61,7 @@ with detection_graph.as_default():
                     feed_dict={image_tensor: image_np_expanded})
 
                 num = int(num[0])
-                result = {'boxes': boxes[0][:num], 'scores': scores[0][:num], 'classes': classes[0][:num], 'num': num}
+                result = {'boxes': boxes[0][:num].tolist(), 'scores': scores[0][:num].tolist(), 'classes': classes[0][:num].tolist(), 'num': num}
                 test_image_results[img] = result
                 print('results appended')
             except Exception as e:
